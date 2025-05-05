@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+</head>
+<body>
+    <h2>Register as a Buyer or Seller</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+        
+        <label for="id_username">Username:</label>
+        {{ form.username }}
+
+        <label for="id_email">Email:</label>
+        {{ form.email }}
+
+        <label for="id_password">Password:</label>
+        {{ form.password }}
+
+        <label for="id_name">Full Name:</label>
+        {{ form.name }}
+
+        <label for="id_user_type">Registering as:</label>
+        {{ form.user_type }}
+
+        <button type="submit">Register</button>
+
+        {% if form.errors %}
+            <ul>
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <li>{{ field.label }}: {{ error }}</li>
+                    {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </form>
+
+</body>
+</html>

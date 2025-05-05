@@ -1,0 +1,31 @@
+<!-- shopping_app/templates/items/item_form.html -->
+<!-- html to create an item page with name, price, description, image, availability -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Item</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        label { display: block; margin-top: 10px; }
+        input, textarea { width: 100%; padding: 8px; margin-top: 5px; }
+        button { margin-top: 15px; padding: 10px 20px; }
+    </style>
+</head>
+<body>
+    <h1>Add New Item</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <p>{{ form.name.label_tag }} {{ form.name }}</p>
+        <p>{{ form.description.label_tag }} {{ form.description }}</p>
+        <p>{{ form.price.label_tag }} {{ form.price }}</p>
+        <p>{{ form.available.label_tag }} {{ form.available }}</p>
+        <p>{{ form.image.label_tag }} {{ form.image }}</p>
+
+        <button type="submit">Save</button>
+    </form>
+    <p><a href="{% url 'view_store' pk=store.pk %}">Back to Store</a></p>
+</body>
+</html>

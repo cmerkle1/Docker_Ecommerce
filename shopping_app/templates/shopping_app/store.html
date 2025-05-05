@@ -1,0 +1,41 @@
+<!-- shopping_app/templates/store.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ store.name }} - Storefront</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'shopping_app/styles.css' %}">
+</head>
+<body>
+    <a href="% url 'store_detail' store.pk %">
+        <h1>{{ store.name }}</h1>
+    </a>
+    <p>Welcome!</p>
+
+    <h2>Your Items</h2>
+    {% if items %}
+        {% for item in items %}
+            <div class="item">
+                <h3>{{ item.name }}</h3>
+                <p>{{ item.description }}</p>
+                <p><strong>Price:</strong> ${{ item.price }}</p>
+                <p>{{ item.image }}</p>
+                    {% if item.image %}
+                        <img src="{{ item.image.url }}" alt="{{ item.name }}" style="max-width: 200px;">
+                    {% endif %}
+                <div class="actions">
+                    <a href="{% url 'item_update' pk=item.id %}">Edit Item</a>
+                    <a href="{% url 'item_delete' item.pk %}">Delete</a>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>You haven’t listed any items yet.</p>
+    {% endif %}
+
+    <p><a href="{% url 'add_item_to_store' %}">Add a New Item</a></p>
+    <p><a href="{% url 'home' %}">Home</a></p>
+</body>
+</html>
